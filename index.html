@@ -2,176 +2,138 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="مواقيت الصلاة لمسجد السنة - مدينة المحمدية، ولاية معسكر، الجزائر. أوقات الصلاة الدقيقة محسوبة حسب إحداثيات المسجد.">
-  <meta name="theme-color" content="#0d2b1d">
-  <title>مواقيت الصلاة | مسجد السنة - المحمدية، معسكر</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="مواقيت الصلاة لمسجد السنة بالمحمدية، في تجربة مخصّصة للهاتف.">
+  <meta name="theme-color" content="#08271d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>مواقيت الصلاة | مسجد السنة</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=6">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕌</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/style.css?v=mobile-1">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
 </head>
 <body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <span class="brand-icon" aria-hidden="true">🕌</span>
-        <div class="brand-text">
-          <h1 class="brand-name">مسجد السنة</h1>
-          <p class="brand-sub">المحمدية — ولاية معسكر، الجزائر</p>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="identity">
+        <span class="brand-mark" aria-hidden="true">☾</span>
+        <div>
+          <p class="eyebrow">مواقيت الصلاة</p>
+          <h1>مسجد السنة</h1>
         </div>
       </div>
-      <div class="date-block">
-        <p class="header-clock" id="header-clock" aria-hidden="true">--:--:--</p>
+      <div class="header-time" aria-label="الوقت الحالي">
+        <span id="header-clock">--:--</span>
+        <small>المحمدية</small>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="today-view" id="today" aria-label="مواقيت اليوم">
         <p class="date-hijri" id="date-hijri" aria-live="polite">—</p>
         <p class="date-gregorian" id="date-gregorian">—</p>
-      </div>
-    </div>
-  </header>
 
-  <main>
-    <!-- TV mode screen -->
-    <section id="tv-screen" aria-label="وضع العرض على التلفاز">
-      <div class="tv-wrap">
-        <div class="tv-dates">
-          <p class="tv-hijri" id="tv-date-hijri">—</p>
-          <p class="tv-greg" id="tv-date-greg">—</p>
-        </div>
-        <div class="tv-clock" id="tv-clock">--:--</div>
-        <div class="tv-next">
-          <p class="tv-next-label">الصلاة القادمة</p>
-          <h2 class="tv-next-name" id="tv-next-name">—</h2>
-          <p class="tv-next-time" id="tv-next-time">—</p>
-          <p class="tv-countdown" id="tv-countdown">--:--:--</p>
-        </div>
-        <div class="tv-times" id="tv-times"></div>
-        <p class="tv-jumua" id="tv-jumua"></p>
-        <p class="tv-ramadan" id="tv-ramadan"></p>
-      </div>
-    </section>
-
-    <!-- Next prayer hero -->
-    <section class="hero" aria-label="الصلاة القادمة">
-      <div class="container">
-        <div class="next-prayer-card">
+        <section class="next-prayer-card" aria-label="الصلاة القادمة">
+          <div class="card-orbit" aria-hidden="true"></div>
           <p class="next-label">الصلاة القادمة</p>
           <h2 class="next-name" id="next-prayer-name">—</h2>
           <p class="next-time" id="next-prayer-time">—</p>
           <div class="countdown" role="timer" aria-live="off">
-            <span class="countdown-label">يتبقى</span>
-            <span class="countdown-value" id="countdown">--:--:--</span>
+            <span>يتبقى</span>
+            <strong id="countdown">--:--:--</strong>
           </div>
-          <div class="sound-row">
-            <button class="btn sound-btn" id="enable-sound" type="button" hidden>🔊 تفعيل صوت الأذان</button>
-            <p class="sound-hint" id="sound-hint">اضغط الزر مرة واحدة لتسمع الأذان عند كل صلاة</p>
-          </div>
-          <p class="ramadan-chip" id="ramadan-chip" hidden>🌙</p>
-        </div>
-      </div>
-    </section>
+          <p class="ramadan-chip" id="ramadan-chip" hidden></p>
+        </section>
 
-    <!-- Today's times -->
-    <section class="times-section" aria-label="مواقيت اليوم">
-      <div class="container">
-        <h2 class="section-title">مواقيت اليوم</h2>
-        <div class="times-grid" id="times-grid">
-          <!-- JS fills -->
+        <div class="sound-card" id="sound-card">
+          <span class="sound-icon" aria-hidden="true">🔊</span>
+          <div class="sound-copy">
+            <strong>صوت الأذان</strong>
+            <span id="sound-hint">فعّله مرة واحدة لسماع الأذان</span>
+          </div>
+          <button class="sound-btn" id="enable-sound" type="button" hidden>تفعيل</button>
         </div>
-        <div class="sunnah-row" id="sunnah-row">
-          <!-- JS fills: middle of night / last third -->
-        </div>
-        <p class="jumua-note" id="jumua-note">—</p>
-      </div>
-    </section>
 
-    <!-- Monthly calendar -->
-    <section class="calendar-section" aria-label="جدول الشهر">
-      <div class="container">
-        <div class="calendar-head">
-          <h2 class="section-title">جدول مواقيت الشهر</h2>
-          <div class="month-nav">
-            <button class="btn" id="prev-month" type="button" aria-label="الشهر السابق">‹ السابق</button>
-            <span class="month-label" id="month-label">—</span>
-            <button class="btn" id="next-month" type="button" aria-label="الشهر التالي">التالي ›</button>
+        <section class="prayers-section" id="prayers" aria-labelledby="prayers-title">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">اليوم</p>
+              <h2 id="prayers-title">مواقيت الصلاة</h2>
+            </div>
+            <span class="timezone-chip">+01 GMT</span>
+          </div>
+          <div class="times-grid" id="times-grid" role="list"></div>
+          <p class="jumua-note" id="jumua-note">—</p>
+
+          <details class="sunnah-details">
+            <summary>أوقات قيام الليل <span aria-hidden="true">⌄</span></summary>
+            <div class="sunnah-row" id="sunnah-row"></div>
+          </details>
+        </section>
+      </section>
+
+      <section class="calendar-section" id="calendar" aria-labelledby="calendar-title">
+        <div class="section-heading calendar-heading">
+          <div>
+            <p class="section-kicker">خطّط ليومك</p>
+            <h2 id="calendar-title">جدول الشهر</h2>
           </div>
         </div>
-        <div class="table-wrap">
+        <div class="month-nav" aria-label="التنقل بين الأشهر">
+          <button class="icon-btn" id="next-month" type="button" aria-label="الشهر التالي">›</button>
+          <span class="month-label" id="month-label">—</span>
+          <button class="icon-btn" id="prev-month" type="button" aria-label="الشهر السابق">‹</button>
+        </div>
+        <p class="calendar-hint">مرّر الجدول أفقياً لرؤية كل الأوقات، واضغط على يوم لنسخه.</p>
+        <div class="table-wrap" tabindex="0" aria-label="جدول مواقيت الشهر">
           <table class="prayer-table" id="prayer-table">
             <thead id="table-head"></thead>
             <tbody id="table-body"></tbody>
           </table>
         </div>
-        <p class="table-note">جميع الأوقات بتوقيت المحمدية (غرينتش+1). اضغط على أي صف لنسخ أوقاته.</p>
-      </div>
-    </section>
+      </section>
 
-    <!-- Adhkar -->
-    <section class="adhkar-section" aria-label="الأذكار">
-      <div class="container">
-        <h2 class="section-title">الأذكار</h2>
-        <div class="adhkar-tabs" role="tablist" id="adhkar-tabs">
-          <button class="tab-btn active" role="tab" aria-selected="true" data-panel="morning" type="button">☀️ الصباح</button>
-          <button class="tab-btn" role="tab" aria-selected="false" data-panel="evening" type="button">🌙 المساء</button>
-          <button class="tab-btn" role="tab" aria-selected="false" data-panel="sleep" type="button">😴 النوم</button>
-          <button class="tab-btn" role="tab" aria-selected="false" data-panel="afterprayer" type="button">🕌 بعد الصلاة</button>
-        </div>
-        <div id="adhkar-panel" class="adhkar-panel" role="tabpanel" aria-live="polite">
-          <!-- JS fills -->
-        </div>
-        <p class="adhkar-hint">💡 اضغط على أي ذكر لعدّه — تظهر علامة ✓ عند إكمال عدد المرات</p>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section class="about-section">
-      <div class="container">
-        <h2 class="section-title">عن الموقع</h2>
-        <div class="about-grid">
-          <div class="about-card">
-            <h3>حساب دقيق</h3>
-            <p>المواقيت محسوبة محلياً حسب إحداثيات المسجد (35.5896° شمالاً، 0.0740° شرقاً) بمنهج رابطة العالم الإسلامي، وصلاة العصر على المذهب المالكي (قياس ظل الشيء).</p>
+      <section class="adhkar-section" id="adhkar" aria-labelledby="adhkar-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">وردك اليومي</p>
+            <h2 id="adhkar-title">الأذكار</h2>
           </div>
-          <div class="about-card">
-            <h3>يعمل دائماً</h3>
-            <p>الحساب يتم داخل متصفحك دون الحاجة لأي خدمة خارجية، لذا يبقى الموقع دقيقاً حتى دون إنترنت بعد أول زيارة.</p>
-          </div>
-          <div class="about-card">
-            <h3>توقيت الجمعة</h3>
-            <p id="jumua-about">—</p>
-          </div>
+          <span class="tasbih-mark" aria-hidden="true">۞</span>
         </div>
-      </div>
-    </section>
-  </main>
+        <div class="adhkar-tabs" id="adhkar-tabs" aria-label="أنواع الأذكار">
+          <button class="tab-btn active" aria-pressed="true" data-panel="morning" type="button">الصباح</button>
+          <button class="tab-btn" aria-pressed="false" data-panel="evening" type="button">المساء</button>
+          <button class="tab-btn" aria-pressed="false" data-panel="sleep" type="button">النوم</button>
+          <button class="tab-btn" aria-pressed="false" data-panel="afterprayer" type="button">بعد الصلاة</button>
+        </div>
+        <div id="adhkar-panel" class="adhkar-panel" aria-live="polite"></div>
+        <p class="adhkar-hint">اضغط على الذكر لتسجيل كل مرة.</p>
+      </section>
+    </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>🕌 مسجد السنة — المحمدية، ولاية معسكر 29000</p>
-      <p class="footer-small">الأوقات تقريبية للتذكير؛ اعتمد أذان المسجد الرسمي</p>
-      <button class="btn tv-link" id="tv-btn" type="button">📺 وضع العرض على التلفاز</button>
-    </div>
-  </footer>
-
-  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-
-  <button id="tv-fs" class="tv-fs" type="button" title="ملء الشاشة" aria-label="ملء الشاشة" hidden>⛶</button>
-  <button id="tv-exit" class="tv-exit" type="button" title="إنهاء وضع العرض" aria-label="إنهاء وضع العرض">✕</button>
-
-  <div id="adhan-banner" class="adhan-banner" role="alert" hidden>
-    <span class="adhan-banner-text" id="adhan-banner-text">🕌</span>
-    <button class="btn btn-stop" id="stop-adhan" type="button">⏹ إيقاف الأذان</button>
+    <nav class="bottom-nav" aria-label="التنقل الرئيسي">
+      <a class="nav-item active" href="#today" data-nav="today"><span aria-hidden="true">⌂</span><span>اليوم</span></a>
+      <a class="nav-item" href="#prayers" data-nav="prayers"><span aria-hidden="true">◷</span><span>المواقيت</span></a>
+      <a class="nav-item" href="#calendar" data-nav="calendar"><span aria-hidden="true">▦</span><span>الجدول</span></a>
+      <a class="nav-item" href="#adhkar" data-nav="adhkar"><span aria-hidden="true">۞</span><span>الأذكار</span></a>
+    </nav>
   </div>
 
-  <div id="istighfar-bar" class="istighfar-bar" aria-live="polite">
-    <span class="istighfar-label">🕌 استغفار دائم</span>
-    <span class="istighfar-text" id="istighfar-text">أستغفر الله العظيم وأتوب إليه</span>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div id="adhan-banner" class="adhan-banner" role="alert" hidden>
+    <span id="adhan-banner-text">🕌</span>
+    <button class="stop-btn" id="stop-adhan" type="button">إيقاف</button>
   </div>
 
   <script src="js/adhan.umd.min.js"></script>
   <script src="js/adhkar.js"></script>
   <script src="js/config.js"></script>
-  <script src="js/app.js?v=6"></script>
+  <script src="js/app.js?v=mobile-1"></script>
 </body>
 </html>

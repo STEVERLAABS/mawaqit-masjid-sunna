@@ -1,0 +1,20 @@
+{
+  "name": "مواقيت الصلاة — مسجد السنة",
+  "short_name": "مواقيت الصلاة",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08271d",
+  "theme_color": "#08271d",
+  "description": "مواقيت الصلاة لمسجد السنة بالمحمدية في تجربة مخصصة للهاتف.",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
